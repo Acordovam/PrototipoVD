@@ -1,0 +1,55 @@
+﻿<Window x:Class="PrototipoVD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototipoVD"
+        mc:Ignorable="d"
+        Title="Login" Height="559.2" Width="511.5" WindowStartupLocation="CenterScreen" Background="#FF3B9ED6" WindowStyle="None">
+    <Grid Margin="0,0,2,2" Background="#FF2D8AD8">
+        <Button x:Name="btnlogin" Content="Iniciar Sesion" HorizontalAlignment="Left" Margin="152,448,0,0" VerticalAlignment="Top" Width="224" Height="30" Background="#FF7DC2E2" FontSize="16" Click="Button_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label Content="Usuario:" HorizontalAlignment="Left" Margin="210,256,0,0" VerticalAlignment="Top" Background="#00000000" Foreground="White" FontSize="18">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="198,346,0,0" VerticalAlignment="Top" Background="#00000000" Foreground="White" FontSize="18" RenderTransformOrigin="0.677,0.355">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="txtuser" HorizontalAlignment="Left" Height="30" Margin="82,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" FontSize="16" UndoLimit="98" SelectionBrush="#FF1DB09C" Foreground="Black" AutoWordSelection="True">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+        <Image HorizontalAlignment="Left" Height="217" Margin="142,34,0,0" VerticalAlignment="Top" Width="234" Source="Iconos/amistad.png">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="Iconos/amistad.png" Stretch="Uniform" TileMode="FlipX"/>
+            </Image.OpacityMask>
+        </Image>
+        <PasswordBox HorizontalAlignment="Left" Margin="82,385,0,0" VerticalAlignment="Top" Width="346" Height="30" FontSize="16"/>
+        <StackPanel x:Name="moverbarra" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="502" MouseDown="Moverbarra_MouseDown" Background="#FF2D8AD8"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="456,-1,0,0" VerticalAlignment="Top" Width="46" Height="30" Click="Button_Click_1">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos/boton-de-cancelar.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" HorizontalAlignment="Left" Margin="410,-1,0,0" VerticalAlignment="Top" Width="46" Height="30" Click="Button_Click_2">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos/minimizar.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+
+    </Grid>
+</Window>
