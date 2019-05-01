@@ -5,12 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrototipoVD"
         mc:Ignorable="d"
-        Title="Principal" Height="450" Width="800" WindowStyle="None">
-    <Grid>
+        Title="Principal" Height="664.577" Width="1147.003" WindowStyle="None">
+    <Grid Margin="0,0,2,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="792" MouseDown="StackPanel_MouseDown" Background="#FF2D8AD8"/>
+        <StackPanel Height="31" VerticalAlignment="Top" MouseDown="StackPanel_MouseDown" Background="#FF15A295" Margin="0,-1,0,0"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="1106,-1,0,0" VerticalAlignment="Top" Width="31" BorderBrush="{x:Null}" Height="30" Click="Button_Click_2">
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos/boton-de-cancelar.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" HorizontalAlignment="Left" Margin="1075,0,0,0" VerticalAlignment="Top" Width="31" BorderBrush="{x:Null}" Height="30" Click="Button_Click_1">
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos/minimizar.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Grid x:Name="menu" Margin="0,30,0,0" Background="#FFF16B2C" HorizontalAlignment="Left" Width="214">
+            <Button Content="" VerticalAlignment="Top" Height="31" Click="Button_Click_3" HorizontalAlignment="Right" Width="32">
+                <Button.Background>
+                    <ImageBrush ImageSource="Iconos/contraer-con-dos-flechas-de-simbolo-diagonal.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+        </Grid>
 
     </Grid>
 </Window>

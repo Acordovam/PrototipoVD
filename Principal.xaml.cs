@@ -19,6 +19,9 @@ namespace PrototipoVD
     /// </summary>
     public partial class Principal : Window
     {
+        private int AnchoMenu = 214;
+        private int contr = 100;
+
         public Principal()
         {
             InitializeComponent();
@@ -27,6 +30,33 @@ namespace PrototipoVD
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (menu.Width == AnchoMenu)
+            {
+                menu.Width = contr ;
+            }
+            else
+            {
+                menu.Width = AnchoMenu;
+            }
         }
     }
 }
