@@ -1,0 +1,15 @@
+﻿<Window x:Class="PrototipoVD.Forms.nuevoestado"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototipoVD.Forms"
+        mc:Ignorable="d"
+        Title="Nuevo Estado" Height="237.766" Width="506.207">
+    <Grid>
+        <Button Content="Salir" HorizontalAlignment="Left" Margin="413,174,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Button_Click_1"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="206,115,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Button_Click"/>
+        <Label Content="Estado:" HorizontalAlignment="Left" Margin="127,68,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.426,0.552"/>
+        <TextBox x:Name="txtestado" HorizontalAlignment="Left" Height="23" Margin="206,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" RenderTransformOrigin="0.308,0.391"/>
+    </Grid>
+</Window>

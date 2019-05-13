@@ -1,0 +1,16 @@
+﻿<Window x:Class="PrototipoVD.Forms.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototipoVD.Forms"
+        mc:Ignorable="d"
+        Title="Nuevo Departamento" Height="235.423" Width="522.888">
+    <Grid x:Name="departamento" Margin="0,0,2,9">
+        <Label Content="Departamento:" HorizontalAlignment="Left" Margin="135,64,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="txtdept" HorizontalAlignment="Left" Height="23" Margin="278,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14"/>
+        <Button x:Name="btnguardardept" Content="Guardar" HorizontalAlignment="Left" Margin="228,121,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Button_Click"/>
+        <Button Content="Salir" HorizontalAlignment="Left" Margin="428,165,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>

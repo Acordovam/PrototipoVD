@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
+using PrototipoVD.Class;
+
 namespace PrototipoVD
 {
     /// <summary>
@@ -30,12 +32,20 @@ namespace PrototipoVD
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+            connection conexion = new connection();
+            if (conexion.conectar()== true){
+                Principal nuevo = new Principal();
+                this.Hide();
+                conexion.desconectar();
+                nuevo.ShowDialog();
+                this.Show();
+            }
+            else
+            {
 
-
-            Principal nuevo = new Principal();
-            this.Hide();
-            nuevo.ShowDialog();
-            this.Show();
+            }
+            
+          
         }
 
         private void Moverbarra_MouseDown(object sender, MouseButtonEventArgs e)

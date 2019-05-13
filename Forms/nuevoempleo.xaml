@@ -1,0 +1,16 @@
+﻿<Window x:Class="PrototipoVD.Forms.nuevoempleo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototipoVD.Forms"
+        mc:Ignorable="d"
+        Title="Nuevo Empleo" Height="232.077" Width="532.303">
+    <Grid>
+        <Label Content="Empleo:" HorizontalAlignment="Left" Margin="129,58,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="txtempleo" HorizontalAlignment="Left" Height="23" Margin="208,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" FontSize="14"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="237,106,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Button_Click_1"/>
+        <Button Content="Salir" HorizontalAlignment="Left" Margin="439,171,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="Button_Click_2"/>
+
+    </Grid>
+</Window>
