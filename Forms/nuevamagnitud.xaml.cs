@@ -15,36 +15,28 @@ using PrototipoVD.Class;
 
 namespace PrototipoVD.Forms
 {
-    
     /// <summary>
-    /// Lógica de interacción para Window1.xaml
+    /// Lógica de interacción para nuevamagnitud.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class nuevamagnitud : Window
     {
-        private connection con = new connection();
-        public Window1()
+        connection cone = new connection();
+        public nuevamagnitud()
         {
-            
-            
             InitializeComponent();
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string dept = txtdept.Text;
-
-                con.conectar();
-                con.consulta("insert into departamento values('0', '"+dept+"');");
-            txtdept.Clear();
-            con.desconectar();
-
-
+            this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            cone.conectar();
+            cone.consulta("insert into magnitud values('0', '" + txtmagnitud.Text +"');");
+            txtmagnitud.Clear();
+            cone.desconectar();
         }
     }
 }

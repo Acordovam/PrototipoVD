@@ -31,6 +31,7 @@ namespace PrototipoVD.Forms
             con.conectar();
             string estado = txtestado.Text;
             con.consulta("insert into estado values('0', '"+estado+"');");
+            txtestado.Clear();
             con.desconectar();
         }
 

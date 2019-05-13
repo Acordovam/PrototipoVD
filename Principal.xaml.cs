@@ -26,7 +26,7 @@ namespace PrototipoVD
         private int AnchoMenu = 214;
         private int contr = 100;
         private connection con = new connection();
-        private MySqlDataReader reader;
+
 
         public Principal()
         {
@@ -65,23 +65,29 @@ namespace PrototipoVD
             cbsucursalF.Items.Clear();
             cbempleadoF.Items.Clear();
             cbestadoF.Items.Clear();
+            cbmagnitudP.Items.Clear();
+            limpiarText();
      
         }
         
         public void actualizarData()
         {
             limpiar();
-            llenarCB(cbdepartamentoSubDepartamento, "select iddepartamento, descripcion from departamento");
-            llenarCB(cbtipoempleo, "select idtipoempleo, descripcion from tipoempleo");
-            llenarCB(cbsubdepartamento, "select idsubdepartamento, descripcion from subdepartamento");
+            
+            llenarCB(cbdepartamentoSubDepartamento, "select iddepartamento, descripcion from departamento;");
+            llenarCB(cbtipoempleo, "select idtipoempleo, descripcion from tipoempleo;");
+            llenarCB(cbsubdepartamento, "select idsubdepartamento, descripcion from subdepartamento;");
 
-            llenarCB(cbclienteF, "select idcliente, nombre from cliente");
-            llenarCB(cbsucursalF, "select idsucursal, nombre from sucursal");
-            llenarCB(cbempleadoF, "select idempleado, nombre from empleado");
+            llenarCB(cbclienteF, "select idcliente, nombre from cliente;");
+            llenarCB(cbsucursalF, "select idsucursal, nombre from sucursal;");
+            llenarCB(cbempleadoF, "select idempleado, nombre from empleado;");
             llenarCB(cbestadoF, "select idestado, descripcion from estado");
+            llenarCB(cbmagnitudP, "select idmagnitud, descripcion from magnitud");
 
             llenarDGEmpleado();
             llenarDGFactura();
+            llenarDGProducto();
+            llenarDGProveedor();
         }
         public void limpiarText()
         {
@@ -97,36 +103,44 @@ namespace PrototipoVD
             txtdpi.Clear();
             txttotalconF.Clear();
             txttotalsinF.Clear();
+            txtprecioP.Clear();
+            txtidP.Clear();
+            txtmarcaP.Clear();
+            txtidPro.Clear();
+            txtcontactoPro.Clear();
+            txtcuentaPro.Clear();
+            txtdireccionPro.Clear();
+            txtemailPro.Clear();
+            txtnombrePro.Clear();
+            txttelcontactoPro.Clear();
+            txttelefonoPro.Clear();
 
 
         }
         public void llenarCB(ComboBox caja, string sql)
         {
-           
-            reader= con.consulta(sql);
+            
+            MySqlDataReader reader = con.consulta(sql);
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
                     caja.Items.Add(reader.GetString(0)+" "+reader.GetString(1));
-                    // Ejemplo para mostrar en el listView1 :
-                    //string[] row = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3) };
-                    //var listViewItem = new ListViewItem(row);
-                    //listView1.Items.Add(listViewItem);
+
                 }
             }
             reader.Close();
         }
-
+        
         public void llenarDGEmpleado()//DATA GRIED DE EMPLEADOS
         {
             string sql = "select empleado.idempleado, tipoempleo.descripcion, subdepartamento.descripcion, empleado.nombre, " +
                 "empleado.direccion, empleado.telefono, empleado.email, empleado.folio, empleado.salario, " +
                 "empleado.dpi from empleado, tipoempleo, subdepartamento where empleado.idtipoempleo=tipoempleo.idtipoempleo " +
                 "and empleado.idsubdepartamento=subdepartamento.idsubdepartamento;";
-            dgempleado.Items.Clear();
-            reader = con.consulta(sql);
             DataTable dt = new DataTable();
+            MySqlDataReader reader = con.consultaTabla(sql);
+
             dt.Columns.Add("ID");
             dt.Columns.Add("Empleo");
             dt.Columns.Add("Sub Departamento");
@@ -137,16 +151,17 @@ namespace PrototipoVD
             dt.Columns.Add("Folio");
             dt.Columns.Add("Salario");
             dt.Columns.Add("DPI");
-
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), 
-                    reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9));
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4),
+                    reader.GetString(5), reader.GetString(6), reader.GetString(7));
                 }
-            }reader.Close();
+            }
+            reader.Close();
             dgempleado.ItemsSource = dt.DefaultView;
+            
         }
         //DATA GRIED DE FACTURA
         public void llenarDGFactura()
@@ -155,8 +170,8 @@ namespace PrototipoVD
                 "factura.fecha, factura.totalIVA, factura.totalsinIVA from factura, cliente, sucursal, empleado, " +
                 "estado where factura.idcliente=cliente.idcliente and factura.idsucursal=sucursal.idsucursal and " +
                 "factura.idempleado=empleado.idempleado and estado.idestado=estado.idestado;";
-            dgfactura.Items.Clear();
-            reader = con.consulta(sql);
+
+            MySqlDataReader reader = con.consultaTabla(sql);
             DataTable dt = new DataTable();
             dt.Columns.Add("ID Factura");
             dt.Columns.Add("Cliente");
@@ -174,8 +189,88 @@ namespace PrototipoVD
                     reader.GetString(5), reader.GetString(6), reader.GetString(7));
                 }
             }
-            reader.Close();
             dgfactura.ItemsSource = dt.DefaultView;
+            reader.Close();
+           
+        }
+        public void llenarDGProducto()
+        {
+            string sql = "select producto.idproducto, producto.descripcion, magnitud.descripcion, " +
+                "producto.marca, producto.habilitado, producto.esfabricado, producto.precio from producto " +
+                "inner join magnitud on producto.idmagnitud=magnitud.idmagnitud;";
+
+            MySqlDataReader reader = con.consultaTabla(sql);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID Producto");
+            dt.Columns.Add("Descripción");
+            dt.Columns.Add("Magnitud");
+            dt.Columns.Add("Marca");
+            dt.Columns.Add("Habilitado");
+            dt.Columns.Add("fabricado");
+            dt.Columns.Add("Precio");
+
+            string habi = "";
+            string fab = "";
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+
+                    if (reader.GetString(4)=="1")
+                    {
+                        habi = "Si";
+                    }
+                    else
+                    {
+                        habi = "No";
+                    }
+                    if (reader.GetString(5) == "1")
+                    {
+                        fab = "Si";
+                    }
+                    else
+                    {
+                        fab = "No";
+                    }
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), habi,
+                    fab, reader.GetString(6));
+                }
+            }
+            dgproducto.ItemsSource = dt.DefaultView;
+            reader.Close();
+
+        }
+        public void llenarDGProveedor()
+        {
+            string sql = "select * from proveedor;";
+
+            MySqlDataReader reader = con.consultaTabla(sql);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID Proveedor");
+            dt.Columns.Add("Nombre");
+            dt.Columns.Add("Dirección");
+            dt.Columns.Add("Teléfonos");
+            dt.Columns.Add("Email");
+            dt.Columns.Add("Contacto");
+            dt.Columns.Add("Tel. Contacto");
+            dt.Columns.Add("fecha");
+            dt.Columns.Add("Cuenta Bancaria");
+
+            string habi = "";
+            string fab = "";
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+
+                  
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4),
+                    reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8));
+                }
+            }
+            dgproveedor.ItemsSource = dt.DefaultView;
+            reader.Close();
+
         }
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -314,18 +409,26 @@ namespace PrototipoVD
 
         private void TxtguardarE_Click(object sender, RoutedEventArgs e)
         {
-            string empleo = cbtipoempleo.SelectionBoxItem.ToString().Substring(0, 1);
-            string subdept = cbsubdepartamento.SelectionBoxItem.ToString().Substring(0, 1);
-            string tel = txttelefono.Text;
-            string folio = txtfolio.Text;
-            string nombre = txtnombre.Text;
-            string dire = txtdireccion.Text;
-            string email = txtemail.Text;
-            string salario = txtsalario.Text;
-            string dpi = txtdpi.Text;
-            con.consulta("insert into empleado values('0', '"+empleo+"', '"+subdept+"', '"+nombre+"', '"+dire+"', '"+tel+"', '"+email+"', '"+folio+"', '"+salario+"', '"+dpi+"');");
-            limpiarText();
-            llenarDGEmpleado();
+            try
+            {
+                string empleo = cbtipoempleo.SelectionBoxItem.ToString().Substring(0, 1);
+                string subdept = cbsubdepartamento.SelectionBoxItem.ToString().Substring(0, 1);
+                string tel = txttelefono.Text;
+                string folio = txtfolio.Text;
+                string nombre = txtnombre.Text;
+                string dire = txtdireccion.Text;
+                string email = txtemail.Text;
+                string salario = txtsalario.Text;
+                string dpi = txtdpi.Text;
+                con.consulta("insert into empleado values('0', '" + empleo + "', '" + subdept + "', '" + nombre + "', '" + dire + "', '" + tel + "', '" + email + "', '" + folio + "', '" + salario + "', '" + dpi + "');");
+                limpiarText();
+                actualizarData();
+            }
+            catch(Exception se)
+            {
+                MessageBox.Show("Error al guardar Datos, verifique que todas las casillas necesarias estan llenas." + se, "Error al llenar", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         private void Btnnuevoestado_Click(object sender, RoutedEventArgs e)
@@ -337,17 +440,100 @@ namespace PrototipoVD
 
         private void BtnguardarF_Click(object sender, RoutedEventArgs e)
         {
-            string id = txtidF.Text;
-            string cliente = cbclienteF.SelectionBoxItem.ToString().Substring(0, 1);
-            string sucursal = cbsucursalF.SelectionBoxItem.ToString().Substring(0, 1);
-            string empleado = cbempleadoF.SelectionBoxItem.ToString().Substring(0, 1);
-            string estado = cbestadoF.SelectionBoxItem.ToString().Substring(0, 1);
-            string fecha = dpfechaF.SelectedDate.ToString().Substring(0, 10);
-            string coniva = txttotalconF.Text;
-            string siniva = txttotalsinF.Text;
-            con.consulta("insert into factura values('0', '"+cliente+"', '"+sucursal+"', '"+empleado+"', '"+estado+"', '"+fecha+"', '"+coniva+"', '"+siniva+"');");
-            limpiarText();
-            llenarDGFactura();
+            try
+            {
+                string id = txtidF.Text;
+                string cliente = cbclienteF.SelectionBoxItem.ToString().Substring(0, 1);
+                string sucursal = cbsucursalF.SelectionBoxItem.ToString().Substring(0, 1);
+                string empleado = cbempleadoF.SelectionBoxItem.ToString().Substring(0, 1);
+                string estado = cbestadoF.SelectionBoxItem.ToString().Substring(0, 1);
+                string fecha = dpfechaF.SelectedDate.ToString().Substring(0, 10);
+                string coniva = txttotalconF.Text;
+                string siniva = txttotalsinF.Text;
+                con.consulta("insert into factura values('0', '" + cliente + "', '" + sucursal + "', '" + empleado + "', '" + estado + "', '" + fecha + "', '" + coniva + "', '" + siniva + "');");
+                limpiarText();
+                actualizarData();
+            }
+            catch(Exception s)
+            {
+                MessageBox.Show("Error al ingresar los Datos, verifique que no haya dejado alguna casilla importante en blanco.\n"+s, "Error de Ingreso de Datos", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
+           
+        }
+
+        private void BtnactualizarData_Click(object sender, RoutedEventArgs e)
+        {
+            actualizarData();
+        }
+
+        private void BtnguardarP_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string descri = txtdescripcionP.Text;
+                string mag = cbmagnitudP.SelectionBoxItem.ToString().Substring(0, 1);
+                string marc = txtmarcaP.Text;
+                string habi;
+                string fab;
+                string precio = txtprecioP.Text;
+
+                if (checkhabilitado.IsChecked == true)
+                {
+                    habi = "1";
+                }
+                else
+                {
+                    habi = "0";
+                }
+                if (checkfabricado.IsChecked == true)
+                {
+                    fab = "1";
+                }
+                else
+                {
+                    fab = "0";
+                }
+                con.consulta("insert into producto values('0', '" + descri + "', '" + mag + "', '" + marc + "', '" + habi + "', '" + fab + "', '" + precio + "');");
+            }
+            catch(Exception es)
+            {
+                MessageBox.Show("Error al insertar datos, procure no dejar casillas en blanco", "Error al insertar", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+
+        private void Btnnuevamagnitud_Click(object sender, RoutedEventArgs e)
+        {
+            nuevamagnitud mag = new nuevamagnitud();
+            mag.ShowDialog();
+            
+        }
+
+        private void BtnguardarPro_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string nombre = txtnombrePro.Text;
+                string dire = txtdireccionPro.Text;
+                string tel = txttelefonoPro.Text;
+                string email = txtemailPro.Text;
+                string contac = txtcontactoPro.Text;
+                string telcont = txttelcontactoPro.Text;
+                string fecha= dpfechaPro.SelectedDate.ToString().Substring(0, 10);
+                string cuenta = txtcuentaPro.Text;
+                con.consulta("insert into proveedor values('0', '"+nombre+"', '"+dire+"', '"+tel+"', '"+email+"', '"+contac+"', '"+telcont+"', '"+fecha+"', '"+cuenta+"');");
+                txtnombrePro.Clear();
+                txtdireccionPro.Clear();
+                txttelefonoPro.Clear();
+                txtemailPro.Clear();
+                txtcontactoPro.Clear();
+                txttelcontactoPro.Clear();
+                txtcuentaPro.Clear();
+            }catch(Exception es)
+            {
+                MessageBox.Show("Error al insertar los datos, procure evitar dejar espacios en blanco.", "Error al insertar", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

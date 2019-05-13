@@ -42,6 +42,7 @@ namespace PrototipoVD.Forms
             string empleo = txtempleo.Text;
             con.conectar();
             con.consulta("insert into tipoempleo values('0','"+empleo +"');");
+            txtempleo.Clear();
             con.desconectar();
         }
 

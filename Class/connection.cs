@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,13 @@ namespace PrototipoVD.Class
         string password="alejandro198";
         string database="prototipobd";
         public MySqlConnection con;
-        MySqlDataReader reader;
+        public MySqlDataReader reader;
+       
+        public DataTable dt = new DataTable();
         public bool conectar()
         {
             bool regreso = false;
-            string coneccion = "datasource=" + ip + ";port=" + puerto + ";username=" + usuario + ";password=" + password + ";database=" + database + ";";
+            string coneccion = "datasource=" + ip + ";port=" + puerto + ";username=" + usuario + ";password=" + password + ";database=" + database + ";SslMode=Preferred;Pooling=True;";
             
             try
             {
@@ -58,12 +61,26 @@ namespace PrototipoVD.Class
                 reader = mySql.ExecuteReader();
                // MessageBox.Show("Consulta ejecutada correctamente", "Correcto", MessageBoxButton.OK, MessageBoxImage.Information);
             }catch(Exception e){
-                MessageBox.Show("Consulta ejecutada Incorrectamente. Si el error persiste porfavor comunicarse con el administrador:\n"+sql+"\n\n"+e, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                reader = null;
+                 MessageBox.Show("Consulta ejecutada Incorrectamente. Si el error persiste porfavor comunicarse con el administrador:\n"+sql+"\n\n"+e, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                //reader = null;
+            }
+            return reader;
+        }
+        public MySqlDataReader consultaTabla(string sql)
+        {
+            try
+            {
+                MySqlCommand mySql = new MySqlCommand(sql, con);
+                reader = mySql.ExecuteReader();
+                // MessageBox.Show("Consulta ejecutada correctamente", "Correcto", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception e)
+            {
+              //  MessageBox.Show("Consulta ejecutada Incorrectamente. Si el error persiste porfavor comunicarse con el administrador:\n" + sql + "\n\n" + e, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                //reader = null;
             }
             return reader;
         }
 
-    
     }
 }
