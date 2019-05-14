@@ -88,6 +88,9 @@ namespace PrototipoVD
             llenarDGFactura();
             llenarDGProducto();
             llenarDGProveedor();
+            llenarDGBitacora();
+            llenarDGCliente();
+            llenarDGPedidos();
         }
         public void limpiarText()
         {
@@ -192,6 +195,74 @@ namespace PrototipoVD
             dgfactura.ItemsSource = dt.DefaultView;
             reader.Close();
            
+        }
+        public void llenarDGCliente()
+        {
+            string sql = "select * from cliente;";
+
+            MySqlDataReader reader = con.consultaTabla(sql);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID Cliente");
+            dt.Columns.Add("Nombre");
+            dt.Columns.Add("Dirección");
+            dt.Columns.Add("Teléfonos");
+            dt.Columns.Add("Email");
+            dt.Columns.Add("DPI");
+            dt.Columns.Add("NIT");
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4),
+                    reader.GetString(5), reader.GetString(6));
+                }
+            }
+            dgclientes.ItemsSource = dt.DefaultView;
+            reader.Close();
+
+        }
+        public void llenarDGPedidos()
+        {
+            string sql = "select * from pedido;";
+
+            MySqlDataReader reader = con.consultaTabla(sql);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID Pedido");
+            dt.Columns.Add("Id Factura");
+            dt.Columns.Add("Placa");
+            dt.Columns.Add("Ruta");
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3));
+                }
+            }
+            dgpedido.ItemsSource = dt.DefaultView;
+            reader.Close();
+
+        }
+        public void llenarDGBitacora()
+        {
+            string sql = "select * from bitacora;";
+
+            MySqlDataReader reader = con.consultaTabla(sql);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID Bitacora");
+            dt.Columns.Add("Acción");
+            dt.Columns.Add("Descripción");
+            dt.Columns.Add("Fecha Hora");
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3));
+                }
+            }
+            dgbitacora.ItemsSource = dt.DefaultView;
+            reader.Close();
+
         }
         public void llenarDGProducto()
         {
@@ -534,6 +605,32 @@ namespace PrototipoVD
             {
                 MessageBox.Show("Error al insertar los datos, procure evitar dejar espacios en blanco.", "Error al insertar", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void BtnguardarC_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBox.Show("Error al insertar los datos. Revise queno ha dejado algún espacio en blanco", "Error al insertar", MessageBoxButton.OK, MessageBoxImage.Error);
+                string nom = txtnombreC.Text;
+                string dire = txtdireccionC.Text;
+                string tel = txttelefonoC.Text;
+                string em = txtemailC.Text;
+                string dpi = txtdpiC.Text;
+                string nit = txtnitC.Text;
+                con.consulta("insert into cliente values('0', '" + nom + "', '" + dire + "', '" + tel + "', '" + em + "', '" + dpi + "', '" + nit + "')");
+            }
+            catch (Exception se)
+            {
+                MessageBox.Show("Error al insertar datos, porfavor corrovore que no ha dejado datos importantes en blanco", "Error al insertar Datos", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Btnnuevotransporte_Click(object sender, RoutedEventArgs e)
+        {
+            nuevotransporte trans = new nuevotransporte();
+            trans.ShowDialog();
+
         }
     }
 }

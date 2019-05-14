@@ -120,7 +120,7 @@
             <CheckBox x:Name="checkfabricado" Content="Si" HorizontalAlignment="Left" Margin="838,113,0,0" VerticalAlignment="Top" IsChecked="True"/>
             <Button x:Name="btnnuevamagnitud" Content="..." HorizontalAlignment="Left" Margin="438,174,0,0" VerticalAlignment="Top" Width="23" FontSize="14" Click="Btnnuevamagnitud_Click"/>
         </Grid>
-        <Grid x:Name="proveedor" HorizontalAlignment="Left" Height="610" Margin="219,35,0,0" VerticalAlignment="Top" Width="908">
+        <Grid x:Name="proveedor" HorizontalAlignment="Left" Height="610" Margin="219,35,0,0" VerticalAlignment="Top" Width="908" Visibility="Collapsed">
             <Label Content="Nombre:" HorizontalAlignment="Left" Margin="91,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.538" FontSize="14"/>
             <TextBox x:Name="txtnombrePro" HorizontalAlignment="Left" Height="23" Margin="241,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14"/>
             <Button x:Name="btnguardarPro" Content="Guardar" HorizontalAlignment="Left" Margin="290,282,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="BtnguardarPro_Click"/>
@@ -146,11 +146,11 @@
             <DatePicker x:Name="dpfechaPro" HorizontalAlignment="Left" Margin="612,168,0,0" VerticalAlignment="Top" Width="192" FontSize="14"/>
         </Grid>
         <Grid x:Name="bitacora" HorizontalAlignment="Left" Height="610" Margin="219,35,0,0" VerticalAlignment="Top" Width="908" Visibility="Collapsed">
-            <DataGrid HorizontalAlignment="Left" Height="456" Margin="10,144,0,0" VerticalAlignment="Top" Width="888"/>
+            <DataGrid x:Name="dgbitacora" HorizontalAlignment="Left" Height="456" Margin="10,144,0,0" VerticalAlignment="Top" Width="888"/>
             <Label Content="Bitacora" HorizontalAlignment="Left" Margin="360,28,0,0" VerticalAlignment="Top" FontSize="48"/>
         </Grid>
         <Grid x:Name="cliente" HorizontalAlignment="Left" Height="610" Margin="219,35,0,0" VerticalAlignment="Top" Width="908" Visibility="Collapsed">
-            <Button x:Name="btnguardarC" Content="Guardar" HorizontalAlignment="Left" Margin="290,282,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
+            <Button x:Name="btnguardarC" Content="Guardar" HorizontalAlignment="Left" Margin="290,282,0,0" VerticalAlignment="Top" Width="75" FontSize="14" Click="BtnguardarC_Click"/>
             <Button x:Name="btnEliminarC" Content="Eliminar" HorizontalAlignment="Left" Margin="421,282,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
             <Button x:Name="btnactualizarC" Content="Actualizar" HorizontalAlignment="Left" Margin="546,282,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
             <DataGrid x:Name="dgclientes" HorizontalAlignment="Left" Height="290" Margin="10,310,0,0" VerticalAlignment="Top" Width="888"/>
@@ -165,12 +165,12 @@
             <Label Content="Email:" HorizontalAlignment="Left" Margin="477,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.538" FontSize="14"/>
             <TextBox x:Name="txtdpiC" HorizontalAlignment="Left" Height="23" Margin="627,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14"/>
             <Label Content="DPI:" HorizontalAlignment="Left" Margin="477,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.538" FontSize="14"/>
-            <TextBox x:Name="txtclienteC" HorizontalAlignment="Left" Height="23" Margin="627,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14"/>
+            <TextBox x:Name="txtnitC" HorizontalAlignment="Left" Height="23" Margin="627,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14"/>
             <Label Content="NIT:" HorizontalAlignment="Left" Margin="477,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.538" FontSize="14"/>
             <TextBox x:Name="txttelefonoC" HorizontalAlignment="Left" Height="23" Margin="241,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14"/>
             <Label Content="Telefonos:" HorizontalAlignment="Left" Margin="91,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.538" FontSize="14"/>
         </Grid>
-        <Grid x:Name="Pedidos" HorizontalAlignment="Left" Height="610" Margin="219,35,0,0" VerticalAlignment="Top" Width="908" Visibility="Collapsed">
+        <Grid x:Name="Pedidos" HorizontalAlignment="Left" Height="610" Margin="219,35,0,0" VerticalAlignment="Top" Width="908">
             <ComboBox x:Name="cbfacturaPedido" HorizontalAlignment="Left" Margin="241,139,0,0" VerticalAlignment="Top" Width="192" FontSize="14" SelectionChanged="ComboBox_SelectionChanged">
                 <MenuItem/>
             </ComboBox>
@@ -182,7 +182,7 @@
             <Label Content="Pedidos" HorizontalAlignment="Left" Margin="352,10,0,0" VerticalAlignment="Top" FontSize="36" Background="White"/>
             <Label Content="ID Pedido:" HorizontalAlignment="Left" Margin="91,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.538" FontSize="14"/>
             <TextBox x:Name="txtidPedido" HorizontalAlignment="Left" Height="23" Margin="241,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14" IsEnabled="False"/>
-            <Button x:Name="btnnuevotransporte" Content="..." HorizontalAlignment="Left" Margin="438,167,0,0" VerticalAlignment="Top" Width="27" FontSize="14"/>
+            <Button x:Name="btnnuevotransporte" Content="..." HorizontalAlignment="Left" Margin="438,167,0,0" VerticalAlignment="Top" Width="27" FontSize="14" Click="Btnnuevotransporte_Click"/>
             <ComboBox x:Name="cbtransportePedido" HorizontalAlignment="Left" Margin="241,168,0,0" VerticalAlignment="Top" Width="192" FontSize="14" SelectionChanged="ComboBox_SelectionChanged">
                 <MenuItem/>
             </ComboBox>
