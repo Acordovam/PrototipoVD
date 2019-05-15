@@ -61,7 +61,7 @@ namespace PrototipoVD.Class
                 reader = mySql.ExecuteReader();
                // MessageBox.Show("Consulta ejecutada correctamente", "Correcto", MessageBoxButton.OK, MessageBoxImage.Information);
             }catch(Exception e){
-                 MessageBox.Show("Consulta ejecutada Incorrectamente. Si el error persiste porfavor comunicarse con el administrador:\n"+sql+"\n\n"+e, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                // MessageBox.Show("Consulta ejecutada Incorrectamente. Si el error persiste porfavor comunicarse con el administrador:\n"+sql+"\n\n"+e, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 //reader = null;
             }
             return reader;

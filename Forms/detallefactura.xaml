@@ -1,0 +1,24 @@
+﻿<Window x:Class="PrototipoVD.Forms.detallefactura"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototipoVD.Forms"
+        mc:Ignorable="d"
+        Title="Detalle de la Factura" Height="465.94" Width="811.035">
+    <Grid>
+        <Label Content="ID de Factura:" HorizontalAlignment="Left" Margin="222,42,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Producto:" HorizontalAlignment="Left" Margin="222,76,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Cantidad:" HorizontalAlignment="Left" Margin="222,110,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <ComboBox x:Name="cbfactura" HorizontalAlignment="Left" Margin="332,46,0,0" VerticalAlignment="Top" Width="200" FontSize="14" SelectedIndex="0" SelectionChanged="Cbfactura_SelectionChanged"/>
+        <ComboBox x:Name="cbproducto" HorizontalAlignment="Left" Margin="332,80,0,0" VerticalAlignment="Top" Width="200" FontSize="14" SelectedIndex="0"/>
+        <TextBox x:Name="txtcant" HorizontalAlignment="Left" Height="23" Margin="332,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="371,154,0,0" VerticalAlignment="Top" Width="104" FontSize="14" Height="30" Click="Button_Click"/>
+        <DataGrid x:Name="dgdetalleFactura" HorizontalAlignment="Left" Height="176" Margin="68,201,0,0" VerticalAlignment="Top" Width="682"/>
+        <Button Content="Salir" HorizontalAlignment="Left" Margin="691,400,0,0" VerticalAlignment="Top" Width="102" Height="25" Click="Button_Click_1"/>
+        <Button Content="Buscar" HorizontalAlignment="Left" Margin="632,167,0,0" VerticalAlignment="Top" Width="118" FontSize="14" Click="Button_Click_2"/>
+        <Label Content="Total:" HorizontalAlignment="Left" Margin="68,155,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="lbltotal" Content="" HorizontalAlignment="Left" Margin="129,157,0,0" VerticalAlignment="Top" FontSize="20" Width="74" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

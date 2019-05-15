@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Forms\detallefactura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\nuevamagnitud.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Class\connection.cs" />
+    <Compile Include="Forms\detallefactura.xaml.cs">
+      <DependentUpon>detallefactura.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\nuevamagnitud.xaml.cs">
       <DependentUpon>nuevamagnitud.xaml</DependentUpon>
     </Compile>

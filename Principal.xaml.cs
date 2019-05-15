@@ -52,7 +52,9 @@ namespace PrototipoVD
             this.bitacora.Visibility = Visibility.Collapsed;
             this.otros.Visibility = Visibility.Collapsed;
             this.Pedidos.Visibility = Visibility.Collapsed;
+            nomina.Visibility = Visibility.Collapsed;
             cosa.Visibility = Visibility.Visible;
+           
             
     }
         public void limpiar()
@@ -104,7 +106,6 @@ namespace PrototipoVD
             txtemail.Clear();
             txtsalario.Clear();
             txtdpi.Clear();
-            txttotalconF.Clear();
             txttotalsinF.Clear();
             txtprecioP.Clear();
             txtidP.Clear();
@@ -170,7 +171,7 @@ namespace PrototipoVD
         public void llenarDGFactura()
         {
             string sql = "select factura.idfactura, cliente.nombre, sucursal.nombre, empleado.nombre, estado.descripcion, " +
-                "factura.fecha, factura.totalIVA, factura.totalsinIVA from factura, cliente, sucursal, empleado, " +
+                "factura.fecha, factura.total from factura, cliente, sucursal, empleado, " +
                 "estado where factura.idcliente=cliente.idcliente and factura.idsucursal=sucursal.idsucursal and " +
                 "factura.idempleado=empleado.idempleado and estado.idestado=estado.idestado;";
 
@@ -182,14 +183,13 @@ namespace PrototipoVD
             dt.Columns.Add("Empleado");
             dt.Columns.Add("Estado");
             dt.Columns.Add("Fecha");
-            dt.Columns.Add("Total con IVA");
-            dt.Columns.Add("Total sin IVA");
+            dt.Columns.Add("Total");
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
                     dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4),
-                    reader.GetString(5), reader.GetString(6), reader.GetString(7));
+                    reader.GetString(5), reader.GetString(6));
                 }
             }
             dgfactura.ItemsSource = dt.DefaultView;
@@ -519,9 +519,8 @@ namespace PrototipoVD
                 string empleado = cbempleadoF.SelectionBoxItem.ToString().Substring(0, 1);
                 string estado = cbestadoF.SelectionBoxItem.ToString().Substring(0, 1);
                 string fecha = dpfechaF.SelectedDate.ToString().Substring(0, 10);
-                string coniva = txttotalconF.Text;
-                string siniva = txttotalsinF.Text;
-                con.consulta("insert into factura values('0', '" + cliente + "', '" + sucursal + "', '" + empleado + "', '" + estado + "', '" + fecha + "', '" + coniva + "', '" + siniva + "');");
+                string stotal = txttotalsinF.Text;
+                con.consulta("insert into factura values('0', '" + cliente + "', '" + sucursal + "', '" + empleado + "', '" + estado + "', '" + fecha + "', '" + stotal + "');");
                 limpiarText();
                 actualizarData();
             }
@@ -631,6 +630,25 @@ namespace PrototipoVD
             nuevotransporte trans = new nuevotransporte();
             trans.ShowDialog();
 
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            detallefactura det = new detallefactura();
+            det.ShowDialog();
+        }
+
+        private void Btnguardar_Click(object sender, RoutedEventArgs e)
+        {
+            string idN = txtidN.Text;
+            string inicio = dpfechainicio.SelectedDate.ToString().Substring(0, 10);
+            string fin = dpfechafinal.SelectedDate.ToString().Substring(0, 10);
+            string valor = txtvalort.Text;
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            ocultar(nomina);
         }
     }
 }
