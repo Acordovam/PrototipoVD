@@ -32,7 +32,7 @@
                 <ImageBrush ImageSource="Iconos/amistad.png" Stretch="Uniform" TileMode="FlipX"/>
             </Image.OpacityMask>
         </Image>
-        <PasswordBox HorizontalAlignment="Left" Margin="82,385,0,0" VerticalAlignment="Top" Width="346" Height="30" FontSize="16"/>
+        <PasswordBox x:Name="txtpass" HorizontalAlignment="Left" Margin="82,385,0,0" VerticalAlignment="Top" Width="346" Height="30" FontSize="16"/>
         <StackPanel x:Name="moverbarra" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="502" MouseDown="Moverbarra_MouseDown" Background="#FF2D8AD8"/>
         <Button Content="" HorizontalAlignment="Left" Margin="456,-1,0,0" VerticalAlignment="Top" Width="46" Height="30" Click="Button_Click_1">
             <Button.BorderBrush>

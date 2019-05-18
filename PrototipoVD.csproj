@@ -93,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Windows1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +124,9 @@
     </Compile>
     <Compile Include="Forms\nuevotransporte.xaml.cs">
       <DependentUpon>nuevotransporte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Windows1.xaml.cs">
       <DependentUpon>Windows1.xaml</DependentUpon>

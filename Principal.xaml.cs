@@ -93,6 +93,7 @@ namespace PrototipoVD
             llenarDGBitacora();
             llenarDGCliente();
             llenarDGPedidos();
+            llenarDGnomina();
         }
         public void limpiarText()
         {
@@ -195,6 +196,28 @@ namespace PrototipoVD
             dgfactura.ItemsSource = dt.DefaultView;
             reader.Close();
            
+        }
+        public void llenarDGnomina()
+        {
+            string sql = "select * from nomina;";
+
+            MySqlDataReader reader = con.consultaTabla(sql);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID Nomina");
+            dt.Columns.Add("Fecha de Inicio");
+            dt.Columns.Add("Fecha de Finalización");
+            dt.Columns.Add("Total");
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    dt.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3));
+                }
+            }
+            dgnomina.ItemsSource = dt.DefaultView;
+            reader.Close();
+
         }
         public void llenarDGCliente()
         {
@@ -644,11 +667,72 @@ namespace PrototipoVD
             string inicio = dpfechainicio.SelectedDate.ToString().Substring(0, 10);
             string fin = dpfechafinal.SelectedDate.ToString().Substring(0, 10);
             string valor = txtvalort.Text;
+            con.consulta("insert into nomina values('0', '"+inicio+"', '"+fin+"', '"+valor+"');");
+            txtidN.Clear();
+            txtvalort.Clear();
+            actualizarData();
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
             ocultar(nomina);
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            Window2 nuevo = new Window2();
+            nuevo.ShowDialog();
+        }
+        void borrar(DataGrid data, string fac, string tab)
+        {
+            try
+            {
+                int codigo = Convert.ToInt32(((DataRowView)data.Items[data.SelectedIndex])[0]);
+                con.consulta("delete from "+fac+" where "+fac+"."+tab+"='"+codigo+"';");
+                MessageBox.Show("Dato Borrado", "Dato Borrado ", MessageBoxButton.OK, MessageBoxImage.Information);
+                actualizarData();
+            }
+            catch (Exception es)
+            {
+                MessageBox.Show("Error al eliminar el dato, verifique si seleccionó algo en la tabla y que ningun dato depende de este. Si el problema perciste comuniquese con el administrador", "Error al Eliminar", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+         
+        }
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+
+            borrar(dgnomina, "nomina", "idnomina");
+            
+        }
+
+        private void BtnEliminarpedido_Click(object sender, RoutedEventArgs e)
+        {
+            borrar(dgpedido, "pedido", "idpedido");
+        }
+
+        private void BtnEliminarC_Click(object sender, RoutedEventArgs e)
+        {
+            borrar(dgclientes, "cliente", "idcliente");
+        }
+
+        private void BtnEliminarPro_Click(object sender, RoutedEventArgs e)
+        {
+            borrar(dgproveedor, "proveedor", "idproveedor");
+        }
+
+        private void BtnEliminarP_Click(object sender, RoutedEventArgs e)
+        {
+            borrar(dgproducto, "producto", "idproducto");
+        }
+
+        private void BtneliminarF_Click(object sender, RoutedEventArgs e)
+        {
+            borrar(dgfactura, "factura", "idfactura");
+        }
+
+        private void BtnEliminarE_Click(object sender, RoutedEventArgs e)
+        {
+            borrar(dgempleado, "empleado", "idempleado");
         }
     }
 }

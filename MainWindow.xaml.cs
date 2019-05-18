@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using PrototipoVD.Class;
+using PrototipoVD.Class;
+using MySql.Data.MySqlClient;
 
 namespace PrototipoVD
 {
@@ -22,7 +24,7 @@ namespace PrototipoVD
     /// </summary>
     public partial class MainWindow : Window
     {
-     
+        private connection conexion = new connection();
 
         public MainWindow()
         {
@@ -31,19 +33,47 @@ namespace PrototipoVD
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            connection conexion = new connection();
-            if (conexion.conectar()== true){
-                Principal nuevo = new Principal();
-                this.Hide();
-                conexion.desconectar();
-                nuevo.ShowDialog();
-                this.Show();
-            }
-            else
+            string usuario = txtuser.Text;
+            string pass = txtpass.Password.ToString();
+            try
             {
+                conexion.conectar();
+                MySqlDataReader reader = conexion.consultaTabla("select 1 from usuario where user='"+usuario+"' and pass=aes_encrypt('"+pass+"', 'isis');");
+                
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                   if (reader.GetString(0) =="1")
+                    {
+                        conexion.desconectar();
+                        reader.Close();
+                        if (conexion.conectar() == true)
+                        {
+                            Principal nuevo = new Principal();
+                            this.Hide();
+                            conexion.desconectar();
+                            nuevo.ShowDialog();
+                            this.Show();
+                        }
+                        else
+                        {
 
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o Contraseña Invalido", "Contraseña o Usuario Invalido", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
+            catch (Exception es)
+            {
+                MessageBox.Show("Error al intentar entrar al sistema. Si el problema persiste comuniquese con el administrador","Error al logear",  MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+            
             
           
         }
