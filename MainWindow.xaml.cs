@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using PrototipoVD.Class;
-using PrototipoVD.Class;
 using MySql.Data.MySqlClient;
 
 namespace PrototipoVD
@@ -38,7 +37,7 @@ namespace PrototipoVD
             try
             {
                 conexion.conectar();
-                MySqlDataReader reader = conexion.consultaTabla("select 1 from usuario where user='"+usuario+"' and pass=aes_encrypt('"+pass+"', 'isis');");
+                MySqlDataReader reader = conexion.consultaTabla("select 1 from usuario where userd='"+usuario+"' and pass=aes_encrypt('"+pass+"', 'isis');");
                 
                 if (reader.HasRows)
                 {
@@ -69,7 +68,7 @@ namespace PrototipoVD
             }
             catch (Exception es)
             {
-                MessageBox.Show("Error al intentar entrar al sistema. Si el problema persiste comuniquese con el administrador","Error al logear",  MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error al intentar entrar al sistema. Si el problema persiste comuniquese con el administrador "+es,"Error al logear",  MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
